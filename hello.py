@@ -1,14 +1,12 @@
-import random
-num_dice = int(input("How many dice would you like to roll? "))
-total_sum: int = 0
-for _ in range(num_dice):
- dice_roll = random.randint(1, 6)
-total_sum += dice_roll
-print(f"The total sum of rolling {num_dice} dice is: {total_sum}")
-cities = []
-for i in range(5):
-    city = input(f"Enter the name of city {i+1}: ")
-    cities.append(city)
-print("\nThe cities you entered are:")
-for city in cities:
-    print(city)
+
+seasons = ("winter", "winter", "spring", "spring", "spring",
+           "summer", "summer", "summer", "autumn", "autumn", "autumn", "winter")
+try:
+    month = int(input("Enter the number of a month (1-12): "))
+    if 1 <= month <= 12:
+        print(f"The season is: {seasons[month - 1]}")
+    else:
+        print("Please enter a valid month number between 1 and 12.")
+except ValueError:
+    print("Please enter a valid integer.")
+
