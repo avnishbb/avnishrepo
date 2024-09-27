@@ -30,6 +30,3 @@ def main():
         else:
             print("Invalid choice, please enter 1, 2, or 3.")
 main()
-
-
-
