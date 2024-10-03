@@ -1,34 +1,57 @@
-class InsufficientBalanceError(Exception):
-    """Custom exception raised when withdrawal amount exceeds the balance."""
-    pass
+def write_notes(filename):
+    """Writes new notes to a file (overwrites existing content)."""
+    with open(filename, 'w') as file:
+        note = input("Enter your note: ")
+        file.write(note + '\n')
+        print("Note written successfully!")
 
 
-class NegativeAmountError(Exception):
-    """Custom exception raised when the entered amount is negative."""
-    pass
+def read_notes(filename):
+    """Reads and displays notes from the file."""
+    try:
+        with open(filename, 'r') as file:
+            notes = file.readlines()
+            if notes:
+                print("\nYour notes:")
+                for idx, note in enumerate(notes, 1):
+                    print(f"{idx}. {note.strip()}")
+            else:
+                print("No notes found.")
+    except FileNotFoundError:
+        print("No notes file found. Please add a note first.")
+
+
+def append_notes(filename):
+    """Appends new notes to the existing file."""
+    with open(filename, 'a') as file:
+        note = input("Enter your note to append: ")
+        file.write(note + '\n')
+        print("Note appended successfully!")
 
 
 def main():
-    try:
-        # Get account balance from the user
-        balance = float(input("Enter your account balance: "))
+    filename = 'notes.txt'
 
-        # Get withdrawal amount from the user
-        withdrawal_amount = float(input("Enter the withdrawal amount: "))
+    while True:
+        print("\nMenu:")
+        print("1. Write new notes (overwrite)")
+        print("2. Read existing notes")
+        print("3. Append new notes")
+        print("4. Exit")
+        choice = input("Choose an option (1-4): ")
 
-        # Raise an exception if the withdrawal amount exceeds the balance
-        if withdrawal_amount > balance:
-            raise InsufficientBalanceError("Withdrawal amount exceeds the account balance.")
+        if choice == '1':
+            write_notes(filename)
+        elif choice == '2':
+            read_notes(filename)
+        elif choice == '3':
+            append_notes(filename)
+        elif choice == '4':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
-        # Raise an exception if a negative number is entered
-        if withdrawal_amount < 0:
-            raise NegativeAmountError("Withdrawal amount cannot be negative.")
 
-        # If all checks pass, perform the withdrawal
-        balance -= withdrawal_amount
-        print(f"Withdrawal successful! New balance: {balance:.2f}")
-
-    except ValueError:
-        # Handle non-numeric input
-        print("Invalid input! Please enter numeric values.")
-
+if __name__ == "__main__":
+    main()
