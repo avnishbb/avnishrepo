@@ -18,3 +18,5 @@ plt.grid(True)
 
 # Display the plot
 plt.show
+
+
